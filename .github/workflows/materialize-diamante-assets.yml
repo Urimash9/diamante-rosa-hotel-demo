@@ -1,0 +1,151 @@
+name: Materialize Diamante Rosa assets
+
+on:
+  push:
+    branches:
+      - build-03b-correcao-assets-layout
+    paths:
+      - .github/workflows/materialize-diamante-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assets:
+    if: ${{ !contains(github.event.head_commit.message || '', '[assets-generated]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+        with:
+          ref: build-03b-correcao-assets-layout
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install image tooling
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Download original hotel photographs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .asset-source public/assets/diamante-rosa/master
+          base='https://diamante-rosa-palace.minas-gerais-hotels.com/data/Images/OriginalPhoto/6461/646123/646123764/image-coromandel-diamante-rosa-palace-hotel'
+          for n in 1 2 3 4 5 6 7 8 10; do
+            echo "Downloading photo ${n}..."
+            curl --fail --location --retry 3 --retry-delay 2 \
+              -A 'Mozilla/5.0 (compatible; AveroStudioAssetBot/1.0)' \
+              "${base}-${n}.JPEG" \
+              -o ".asset-source/${n}.jpg"
+          done
+
+      - name: Refine and export local WebP masters
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageEnhance, ImageOps, ImageFilter
+
+          src = Path('.asset-source')
+          out = Path('public/assets/diamante-rosa/master')
+          out.mkdir(parents=True, exist_ok=True)
+
+          mapping = {
+              1: 'facade.webp',
+              2: 'suite-casal.webp',
+              3: 'jacuzzi.webp',
+              4: 'cafe-buffet.webp',
+              5: 'quarto.webp',
+              6: 'lago-entorno.webp',
+              7: 'atrio.webp',
+              8: 'auditorio.webp',
+              10: 'cafe-detalhe.webp',
+          }
+
+          def refine(im: Image.Image) -> Image.Image:
+              im = ImageOps.exif_transpose(im).convert('RGB')
+              # Correção fotográfica moderada: recuperar leitura sem falsificar o hotel.
+              im = ImageEnhance.Brightness(im).enhance(1.07)
+              im = ImageEnhance.Contrast(im).enhance(1.06)
+              im = ImageEnhance.Color(im).enhance(0.98)
+              im = ImageEnhance.Sharpness(im).enhance(1.12)
+              if max(im.size) > 1800:
+                  scale = 1800 / max(im.size)
+                  im = im.resize((round(im.width * scale), round(im.height * scale)), Image.Resampling.LANCZOS)
+              return im
+
+          for number, filename in mapping.items():
+              with Image.open(src / f'{number}.jpg') as source:
+                  image = refine(source)
+                  image.save(out / filename, 'WEBP', quality=88, method=6)
+
+          # Hero mobile: crop vertical derivado da fachada real; nenhum conteúdo inventado.
+          with Image.open(src / '1.jpg') as source:
+              hero = refine(source)
+              mobile = ImageOps.fit(hero, (900, 1080), method=Image.Resampling.LANCZOS, centering=(0.48, 0.46))
+              mobile.save(out / 'facade-mobile.webp', 'WEBP', quality=88, method=6)
+          PY
+
+      - name: Write asset manifest
+        shell: bash
+        run: |
+          cat > public/assets/diamante-rosa/ASSET_MANIFEST.md <<'EOF'
+          # Diamante Rosa — assets locais oficiais da Build 03B
+
+          Estes arquivos foram materializados a partir das fotografias reais em alta resolução já usadas como fonte pública do hotel, tratados de forma moderada e gravados fisicamente no repositório. A Home não deve depender de hotlinks depois da Build 03B.
+
+          ## Masters
+          - `master/facade.webp` — fachada/entrada; Hero desktop e etapa Chegar.
+          - `master/facade-mobile.webp` — crop vertical da mesma fachada; Hero mobile.
+          - `master/atrium.webp` — átrio/lobby; Receber bem, Respirar e apoio de Estrutura.
+          - `master/quarto.webp` — quarto; Descansar e segunda configuração do carrossel.
+          - `master/suite-casal.webp` — suíte; slide principal do carrossel.
+          - `master/jacuzzi.webp` — detalhe da acomodação; nunca tratar como categoria de quarto.
+          - `master/cafe-buffet.webp` — café da manhã; protagonista da seção Café e etapa Despertar.
+          - `master/cafe-detalhe.webp` — detalhe gastronômico; apoio da seção Café.
+          - `master/auditorio.webp` — auditório; protagonista de Estrutura e Serviços.
+          - `master/lago-entorno.webp` — lago/entorno; Sentir que escolheu certo, Continuar e Localização.
+
+          ## Regras
+          1. Usar somente caminhos locais em `/assets/diamante-rosa/master/...` na Home.
+          2. Remover `photo(number)` e o `remotePatterns` exclusivo de `minas-gerais-hotels.com` quando não houver outro uso.
+          3. Não substituir os masters por screenshots de Instagram/Maps.
+          4. Não inventar arquitetura, quartos ou serviços.
+          5. Diferentes seções podem usar crops CSS distintos do mesmo master quando semanticamente correto.
+          EOF
+
+      - name: Validate generated files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s public/assets/diamante-rosa/master/facade.webp
+          test -s public/assets/diamante-rosa/master/facade-mobile.webp
+          test -s public/assets/diamante-rosa/master/atrium.webp
+          test -s public/assets/diamante-rosa/master/quarto.webp
+          test -s public/assets/diamante-rosa/master/suite-casal.webp
+          test -s public/assets/diamante-rosa/master/jacuzzi.webp
+          test -s public/assets/diamante-rosa/master/cafe-buffet.webp
+          test -s public/assets/diamante-rosa/master/cafe-detalhe.webp
+          test -s public/assets/diamante-rosa/master/auditorio.webp
+          test -s public/assets/diamante-rosa/master/lago-entorno.webp
+          echo 'All Diamante Rosa local assets generated.'
+          du -h public/assets/diamante-rosa/master/*
+
+      - name: Commit materialized assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'AVERO Studio Asset Bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/assets/diamante-rosa
+          if git diff --cached --quiet; then
+            echo 'No asset changes to commit.'
+            exit 0
+          fi
+          git commit -m 'chore: add refined local hotel assets [assets-generated]'
+          git push origin HEAD:build-03b-correcao-assets-layout
