@@ -16,8 +16,6 @@ export const images = {
   suite: asset('suite.webp'),
   jacuzzi: asset('jacuzzi.webp'),
   breakfast: asset('breakfast.webp'),
-  // O mesmo master gastronômico pode receber crop diferente na sobreposição de detalhe.
-  breakfastDetail: asset('breakfast.webp'),
   lake: asset('lake.webp'),
   auditorium: asset('auditorium.webp'),
 };
