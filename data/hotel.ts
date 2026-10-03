@@ -29,6 +29,6 @@ export const journey = [
 
 export const stayOptions = [
   { short: 'Suíte casal', title: 'Suíte Casal', label: 'ACOMODAÇÃO', image: images.suite, alt: 'Suíte de casal do Diamante Rosa Palace Hotel', description: 'Conforto, privacidade e tudo o que você precisa para uma estadia especial.', features: ['Ar-condicionado', 'Wi-Fi', 'TV', 'Frigobar', 'Café da manhã'] },
-  { short: 'Outro quarto', title: 'Outra forma de descansar', label: 'ACOMODAÇÃO', image: images.room, alt: 'Segunda configuração de quarto do Diamante Rosa Palace Hotel', description: 'Uma configuração versátil, silenciosa e bem cuidada para a sua passagem por Coromandel.', features: ['Ar-condicionado', 'Wi-Fi', 'Mesa de apoio', 'TV'] },
-  { short: 'Jacuzzi', title: 'Um detalhe a mais', label: 'EXPERIÊNCIA PREMIUM', image: images.jacuzzi, alt: 'Jacuzzi disponível em acomodação do hotel', description: 'A banheira de hidromassagem transforma a pausa em um momento ainda mais especial.', features: ['Hidromassagem', 'Privacidade', 'Conforto', 'Amenidades'] },
+  { short: 'Acomodação conforto', title: 'Acomodação Conforto', label: 'ACOMODAÇÃO', image: images.room, alt: 'Segunda configuração de quarto do Diamante Rosa Palace Hotel', description: 'Uma configuração versátil, silenciosa e bem cuidada para a sua passagem por Coromandel.', features: ['Ar-condicionado', 'Wi-Fi', 'Mesa de apoio', 'TV'] },
+  { short: 'Detalhes da suíte', title: 'Detalhes que completam a experiência', label: 'DETALHE DA ACOMODAÇÃO', image: images.jacuzzi, alt: 'Jacuzzi disponível em acomodação do hotel', description: 'A banheira de hidromassagem transforma a pausa em um momento ainda mais especial.', features: ['Hidromassagem', 'Privacidade', 'Conforto', 'Amenidades'] },
 ] as const;
