@@ -1,15 +1,20 @@
 # Assets — Diamante Rosa Palace Hotel
 
-As fotografias reais são entregues pela galeria pública do hotel e processadas pelo `next/image` (AVIF/WebP, dimensionamento e crop por seção). A origem centralizada está em `data/hotel.ts`; assim, nenhum print de interface ou overlay de plataforma entra na página.
+A Build 03B migra a Home para um conjunto de **assets locais refinados** em `public/assets/diamante-rosa/`. A galeria remota usada temporariamente na Build 03A não é mais a direção aprovada e deverá ser removida assim que os binários locais estiverem presentes.
 
-Organização editorial:
+Consulte `ASSET-MANIFEST.md` para:
 
-- `hero`: fachada/entrada (`photo(1)`)
-- `experiencia`: átrio (`photo(7)`), quarto (`photo(5)`), buffet (`photo(4)`) e entorno (`photo(6)`)
-- `acomodacoes`: suíte (`photo(2)`), variação de quarto (`photo(5)`) e jacuzzi (`photo(3)`)
-- `ritual`: fachada, átrio, quarto, café e entorno
-- `cafe`: buffet (`photo(4)`) e detalhe gastronômico (`photo(10)`)
-- `estrutura`: auditório (`photo(8)`) e átrio (`photo(7)`)
-- `localizacao`: lagoa/entorno (`photo(6)`)
+- nomes exatos dos arquivos;
+- estrutura de pastas;
+- distribuição aprovada por seção;
+- regras para Hero, Experiência, Acomodações, Ritual, Café, Estrutura e Localização.
 
-As subpastas ficam reservadas para os arquivos-mestre fornecidos diretamente pelo hotel, sem alterar os caminhos usados pelos componentes.
+## Regra de implementação
+
+1. Copiar todos os WebP refinados para as subpastas indicadas no manifesto.
+2. Confirmar a existência de todos os arquivos locais.
+3. Só então substituir em `data/hotel.ts` a função `photo(number)` por caminhos locais.
+4. Remover o `remotePatterns` de `minas-gerais-hotels.com` do `next.config.mjs` quando nenhum componente depender mais dele.
+5. Não utilizar screenshots brutos ou os SVGs conceituais antigos como fotografia final.
+
+Os arquivos remotos atuais permanecem apenas como fallback temporário até a integração física dos assets locais, para não quebrar o preview existente.
