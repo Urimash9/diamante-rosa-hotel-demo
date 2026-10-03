@@ -5,11 +5,13 @@ export const hotel = {
   instagram: '@diamanterosapalace',
 };
 
+const photo = (number: number) => `https://diamante-rosa-palace.minas-gerais-hotels.com/data/Images/OriginalPhoto/6461/646123/646123764/image-coromandel-diamante-rosa-palace-hotel-${number}.JPEG`;
+
+// Fotografias reais do hotel, selecionadas e recortadas pelo layout (sem UI ou overlays da fonte).
 export const images = {
-  facade: '/images/diamante-rosa/facade.svg', atrium: '/images/diamante-rosa/atrium.svg',
-  room: '/images/diamante-rosa/room.svg', suite: '/images/diamante-rosa/suite.svg',
-  breakfast: '/images/diamante-rosa/breakfast.svg', lake: '/images/diamante-rosa/lake.svg',
-  auditorium: '/images/diamante-rosa/auditorium.svg',
+  facade: photo(1), atrium: photo(7), room: photo(5), suite: photo(2),
+  jacuzzi: photo(3), breakfast: photo(4), breakfastDetail: photo(10),
+  lake: photo(6), auditorium: photo(8),
 };
 
 export const differentials = [
@@ -26,10 +28,7 @@ export const journey = [
 ] as const;
 
 export const stayOptions = [
-  { short: 'Casal', title: 'Suíte Casal', label: 'ACOMODAÇÃO', image: images.suite, alt: 'Suíte de casal do hotel', description: 'Conforto, privacidade e tudo o que você precisa para uma estadia especial.', features: ['Ar-condicionado', 'Wi-Fi', 'TV', 'Frigobar', 'Café da manhã'] },
-  { short: 'Individual', title: 'Suíte Solteiro', label: 'ACOMODAÇÃO', image: images.room, alt: 'Suíte individual do hotel', description: 'Uma pausa silenciosa e funcional para quem viaja a trabalho ou a lazer.', features: ['Ar-condicionado', 'Wi-Fi', 'Mesa de apoio', 'TV'] },
-  { short: 'Família', title: 'Quarto Família', label: 'ACOMODAÇÃO', image: images.atrium, alt: 'Ambiente familiar do hotel', description: 'Espaço e praticidade para compartilhar a viagem com quem importa.', features: ['Configuração familiar', 'Wi-Fi', 'Frigobar', 'Café da manhã'] },
-  { short: 'Especial', title: 'Suíte Luxo', label: 'EXPERIÊNCIA ESPECIAL', image: images.suite, alt: 'Suíte luxo do hotel', description: 'Mais amplitude, cuidado e detalhes para ocasiões que pedem algo especial.', features: ['Cama ampla', 'Ar-condicionado', 'Frigobar', 'Amenidades'] },
-  { short: 'Eventos', title: 'Auditório & Eventos', label: 'ESTRUTURA', image: images.auditorium, alt: 'Auditório para eventos', description: 'Um ambiente preparado para reuniões, treinamentos e bons encontros.', features: ['Layout flexível', 'Climatização', 'Apoio de equipe', 'Wi-Fi'] },
-  { short: 'Sabores', title: 'Café da manhã', label: 'EXPERIÊNCIA', image: images.breakfast, alt: 'Café da manhã do hotel', description: 'Variedade e cuidado para fazer a primeira hora do dia valer a pena.', features: ['Frutas', 'Pães e bolos', 'Opções quentes', 'Bebidas'] },
+  { short: 'Suíte casal', title: 'Suíte Casal', label: 'ACOMODAÇÃO', image: images.suite, alt: 'Suíte de casal do Diamante Rosa Palace Hotel', description: 'Conforto, privacidade e tudo o que você precisa para uma estadia especial.', features: ['Ar-condicionado', 'Wi-Fi', 'TV', 'Frigobar', 'Café da manhã'] },
+  { short: 'Outro quarto', title: 'Outra forma de descansar', label: 'ACOMODAÇÃO', image: images.room, alt: 'Segunda configuração de quarto do Diamante Rosa Palace Hotel', description: 'Uma configuração versátil, silenciosa e bem cuidada para a sua passagem por Coromandel.', features: ['Ar-condicionado', 'Wi-Fi', 'Mesa de apoio', 'TV'] },
+  { short: 'Jacuzzi', title: 'Um detalhe a mais', label: 'EXPERIÊNCIA PREMIUM', image: images.jacuzzi, alt: 'Jacuzzi disponível em acomodação do hotel', description: 'A banheira de hidromassagem transforma a pausa em um momento ainda mais especial.', features: ['Hidromassagem', 'Privacidade', 'Conforto', 'Amenidades'] },
 ] as const;
