@@ -1,4 +1,4 @@
-# Diamante Rosa — masters locais / Build 03D
+# Diamante Rosa — masters locais / Build 03E
 
 Base visual preservada: `6d84799d2c93838e38056df6df7eaed6680a624b`.
 Masters recuperados integralmente do commit `5162cb541e2bf812db99a7f8b549e5f30554588b`, sem regenerar ou modificar as fotografias.
@@ -27,7 +27,7 @@ Todos os caminhos abaixo são relativos a `/assets/diamante-rosa/master/`.
 | Ritual / Despertar | `breakfast.webp` |
 | Ritual / Continuar | `lake.webp` |
 | Café / principal | `breakfast.webp` |
-| Café / detalhe | `breakfast.webp`, recorte em `82% center` |
+| Café / detalhe | Removido na Build 03E: não há master gastronômico complementar |
 | Estrutura / protagonista | `auditorium.webp` |
 | Localização / lagoa e entorno | `lake.webp` |
 | Localização / hotel no contexto | `facade.webp`, enquadramento amplo do exterior |
@@ -35,7 +35,7 @@ Todos os caminhos abaixo são relativos a `/assets/diamante-rosa/master/`.
 
 ## Limitações reais do conjunto
 
-- Não existe master gastronômico complementar: `breakfastDetail` reutiliza intencionalmente o buffet com outro recorte.
+- Não existe master gastronômico complementar. A Build 03E removeu a imagem duplicada e a chave `breakfastDetail`, preservando uma única fotografia principal do buffet.
 - Não existe uma segunda fotografia aérea/contextual do hotel: o bloco de apoio de Localização usa a fachada local, que mostra o exterior e a entrada; a lagoa usa seu próprio master. Não apresentar esse apoio como vista aérea.
 - `room.webp` e `suite.webp` são arquivos distintos, mas mostram enquadramentos próximos de uma composição com cama de casal e cama de solteiro. A segunda opção mantém um nome neutro; não inventar uma categoria de quarto.
 - Jacuzzi é detalhe da hospedagem, não categoria de quarto.

@@ -11,8 +11,7 @@ const asset = (name: string) => `/assets/diamante-rosa/master/${name}.webp`;
 export const images = {
   facade: asset('facade'), atrium: asset('atrium'), room: asset('room'), suite: asset('suite'),
   jacuzzi: asset('jacuzzi'), breakfast: asset('breakfast'),
-  // O conjunto aprovado tem um único buffet; o detalhe usa outro recorte desse master.
-  breakfastDetail: asset('breakfast'), lake: asset('lake'), auditorium: asset('auditorium'),
+  lake: asset('lake'), auditorium: asset('auditorium'),
 };
 
 export const imageAlts = {
