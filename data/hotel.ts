@@ -5,13 +5,22 @@ export const hotel = {
   instagram: '@diamanterosapalace',
 };
 
-const photo = (number: number) => `https://diamante-rosa-palace.minas-gerais-hotels.com/data/Images/OriginalPhoto/6461/646123/646123764/image-coromandel-diamante-rosa-palace-hotel-${number}.JPEG`;
+const asset = (name: string) => `/assets/diamante-rosa/master/${name}.webp`;
 
-// Fotografias reais do hotel, selecionadas e recortadas pelo layout (sem UI ou overlays da fonte).
+// Masters locais verificados visualmente; os hotlinks numerados devolviam a mesma fachada.
 export const images = {
-  facade: photo(1), atrium: photo(7), room: photo(5), suite: photo(2),
-  jacuzzi: photo(3), breakfast: photo(4), breakfastDetail: photo(10),
-  lake: photo(6), auditorium: photo(8),
+  facade: asset('facade'), atrium: asset('atrium'), room: asset('room'), suite: asset('suite'),
+  jacuzzi: asset('jacuzzi'), breakfast: asset('breakfast'),
+  // O conjunto aprovado tem um único buffet; o detalhe usa outro recorte desse master.
+  breakfastDetail: asset('breakfast'), lake: asset('lake'), auditorium: asset('auditorium'),
+};
+
+export const imageAlts = {
+  facade: 'Fachada e entrada do Diamante Rosa Palace Hotel',
+  atrium: 'Átrio do hotel com lobby e áreas de convivência',
+  room: 'Quarto do hotel com camas preparadas para receber hóspedes',
+  breakfast: 'Buffet de café da manhã com frutas, pães, bolos e bebidas',
+  lake: 'Lagoa e entorno próximo ao Diamante Rosa Palace Hotel',
 };
 
 export const differentials = [
@@ -29,6 +38,6 @@ export const journey = [
 
 export const stayOptions = [
   { short: 'Suíte casal', title: 'Suíte Casal', label: 'ACOMODAÇÃO', image: images.suite, alt: 'Suíte de casal do Diamante Rosa Palace Hotel', description: 'Conforto, privacidade e tudo o que você precisa para uma estadia especial.', features: ['Ar-condicionado', 'Wi-Fi', 'TV', 'Frigobar', 'Café da manhã'] },
-  { short: 'Acomodação conforto', title: 'Acomodação Conforto', label: 'ACOMODAÇÃO', image: images.room, alt: 'Segunda configuração de quarto do Diamante Rosa Palace Hotel', description: 'Uma configuração versátil, silenciosa e bem cuidada para a sua passagem por Coromandel.', features: ['Ar-condicionado', 'Wi-Fi', 'Mesa de apoio', 'TV'] },
-  { short: 'Detalhes da suíte', title: 'Detalhes que completam a experiência', label: 'DETALHE DA ACOMODAÇÃO', image: images.jacuzzi, alt: 'Jacuzzi disponível em acomodação do hotel', description: 'A banheira de hidromassagem transforma a pausa em um momento ainda mais especial.', features: ['Hidromassagem', 'Privacidade', 'Conforto', 'Amenidades'] },
+  { short: 'Outra configuração', title: 'Outra configuração de hospedagem', label: 'ACOMODAÇÃO', image: images.room, alt: 'Segunda configuração de quarto do Diamante Rosa Palace Hotel', description: 'Uma alternativa confortável e bem cuidada para a sua passagem por Coromandel.', features: ['Ar-condicionado', 'Wi-Fi', 'Mesa de apoio', 'TV'] },
+  { short: 'Detalhes da acomodação', title: 'Detalhes da acomodação', label: 'DETALHE DA ACOMODAÇÃO', image: images.jacuzzi, alt: 'Jacuzzi disponível em acomodação do hotel', description: 'A banheira de hidromassagem transforma a pausa em um momento ainda mais especial.', features: ['Hidromassagem', 'Privacidade', 'Conforto', 'Amenidades'] },
 ] as const;

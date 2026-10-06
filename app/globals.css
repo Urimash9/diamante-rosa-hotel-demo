@@ -51,3 +51,12 @@
 @media(max-width:390px){.section{padding-inline:1rem}.hero-copy{padding-inline:1rem}.hero h1{font-size:3rem}.hero-copy .actions{display:grid}.suite-main{margin-inline:-1rem}.suite-card{left:1.35rem;right:1.35rem}.service-list{grid-template-columns:1fr 1fr}.quote{font-size:1rem}}
 @media(min-width:801px) and (max-width:1100px){.stays{grid-template-columns:1fr}.stays-title{padding-top:0;max-width:650px}.showcase{margin-top:1rem}.services{grid-template-columns:44% 56%}.services-copy{padding-right:2rem}}
 @media(prefers-reduced-motion:no-preference){.journey-line{transform-origin:left;animation:lineReveal 1.2s ease-out both;animation-timeline:view();animation-range:entry 25% cover 55%}@keyframes lineReveal{from{scale:0 1}to{scale:1 1}}}
+
+/* Build 03D — apenas recorte gastronômico e leitura do CTA mobile. */
+.breakfast-photo:after{background:linear-gradient(90deg,transparent 55%,#10111155),linear-gradient(0deg,#10111155,transparent 42%)}
+.breakfast-photo img,.breakfast-detail img{filter:none}
+.breakfast-detail img{object-position:82% center}
+@media(max-width:800px){
+  .final-cta h2{font-size:clamp(2.8rem,11.8vw,3.15rem);line-height:1.06;max-width:14ch;text-wrap:balance;margin-bottom:1.6rem}
+  .final-cta .actions{margin-top:1.6rem}
+}

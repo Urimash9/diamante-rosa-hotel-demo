@@ -9,7 +9,6 @@ npm install
 npm run dev
 ```
 
-As referências de imagens estão centralizadas em `data/hotel.ts`. Os SVGs em
-`public/images/diamante-rosa` são placeholders autorais e devem ser substituídos
-pelas fotografias reais mantendo os mesmos nomes de arquivo ou ajustando o mapa
-`images`.
+As fotografias da Home são os masters locais em `public/assets/diamante-rosa/master/`, com mapeamento central em `data/hotel.ts`. A distribuição final e as limitações do conjunto estão em `public/assets/diamante-rosa/ASSET_MANIFEST.md`.
+
+A Build 03D preserva a base visual recuperada do commit `6d84799` e trabalha na branch `build-03d-assets-finais-mobile`, sem merge em `main`.
